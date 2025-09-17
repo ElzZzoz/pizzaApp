@@ -4,5 +4,10 @@ import eslint from "vite-plugin-eslint";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  plugins: [react(), eslint(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    // Only run eslint in development (not in Netlify production build)
+    process.env.NODE_ENV !== "production" && eslint(),
+  ].filter(Boolean),
 });
